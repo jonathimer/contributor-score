@@ -6,9 +6,9 @@ A simple trust score calculator for GitHub contributors. Helps maintainers ident
 
 Open source projects are seeing a growing influx of low-quality, AI-generated pull requests. Maintainers are stuck playing whack-a-mole, manually reviewing and blocking low quality contributions. If we as an open source community don't find solutions, more and more projects will shut down outside contributions.
 
-![Scooby-Doo meme: Open source pull requests unmasked as Claude code without reviewing code](https://pbs.twimg.com/media/HC6mm6macAAHe1_?format=jpg&name=medium)
+Communtiy references: 
 
-*Credit: [@peer_rich](https://x.com/peer_rich/status/2030743675857162330)*
+- "Open source contributions are dead unless things change drastically" [@peer_rich](https://x.com/peer_rich/status/2030743675857162330)
 
 ## The Solution
 
