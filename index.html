@@ -897,6 +897,9 @@
 
         renderResults(username, data, score, breakdown, trustLevel);
 
+        // Update URL for tracking
+        history.replaceState(null, '', `?user=${encodeURIComponent(username)}`);
+
         loading.classList.remove('active');
         results.classList.add('active');
         document.getElementById('cta-section').classList.add('active');
@@ -917,6 +920,14 @@
     document.getElementById('username').addEventListener('keypress', (e) => {
       if (e.key === 'Enter') lookupScore();
     });
+
+    // Auto-load from URL if user param exists
+    const urlParams = new URLSearchParams(window.location.search);
+    const userParam = urlParams.get('user');
+    if (userParam) {
+      document.getElementById('username').value = userParam;
+      lookupScore();
+    }
   </script>
 </body>
 </html>
