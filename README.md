@@ -1,5 +1,7 @@
 # Contributor Score
 
+> **Note:** This is an experimental thesis exploring whether contributor reputation signals can help maintainers triage PRs. The scoring model is a starting point for discussion, not a production-ready solution.
+
 A simple trust score calculator for GitHub contributors. Helps maintainers identify potentially low-quality or spam contributions by analyzing public GitHub data.
 
 ## The Problem
