@@ -55,46 +55,6 @@ node trust-score.js <username>
 node trust-score.js <username> --json
 ```
 
-### GitHub Action
-
-Add to your repository's `.github/workflows/trust-score.yml`:
-
-```yaml
-name: PR Trust Score
-
-on:
-  pull_request:
-    types: [opened, reopened]
-
-jobs:
-  trust-score:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: jonathimer/contributor-trust-score@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          add-comment: true
-          add-label: true
-```
-
-### Action Inputs
-
-| Input | Description | Default |
-|-------|-------------|---------|
-| `github-token` | GitHub token for API access | `${{ github.token }}` |
-| `username` | Username to check (defaults to PR author) | PR author |
-| `add-comment` | Add a comment with the score | `true` |
-| `add-label` | Add a trust label to the PR | `true` |
-| `fail-below` | Fail if score is below threshold | `0` (disabled) |
-
-### Action Outputs
-
-| Output | Description |
-|--------|-------------|
-| `score` | The calculated trust score (0-100) |
-| `level` | Trust level (HIGH, MEDIUM, LOW, NEW) |
-| `username` | The GitHub username that was checked |
-
 ## Example Output
 
 ```
@@ -124,6 +84,7 @@ jobs:
 
 ## Future Enhancements
 
+- GitHub Action for automatic PR scoring
 - Integration with LFX Insights for historical data
 - Contributor verification
 
