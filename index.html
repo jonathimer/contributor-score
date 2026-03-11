@@ -219,6 +219,12 @@
     .username {
       font-size: 18px;
       font-weight: 600;
+      color: #09090b;
+      text-decoration: none;
+    }
+
+    .username:hover {
+      text-decoration: underline;
     }
 
     .score-display {
@@ -592,7 +598,7 @@
       <div class="score-card">
         <div class="user-info">
           <img class="avatar" id="avatar" src="" alt="">
-          <span class="username" id="display-username"></span>
+          <a class="username" id="display-username" href="" target="_blank"></a>
         </div>
         <div class="score-display">
           <span class="score-number" id="score">0</span><span class="score-max">/100</span>
@@ -775,7 +781,9 @@
 
     function renderResults(username, data, score, breakdown, trustLevel) {
       document.getElementById('avatar').src = data.profile.avatar_url;
-      document.getElementById('display-username').textContent = `@${username}`;
+      const usernameEl = document.getElementById('display-username');
+      usernameEl.textContent = `@${username}`;
+      usernameEl.href = `https://github.com/${username}`;
       document.getElementById('score').textContent = score;
 
       const trustLevelEl = document.getElementById('trust-level');
