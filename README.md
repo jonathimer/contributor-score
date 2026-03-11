@@ -92,6 +92,16 @@ node trust-score.js <username> --json
 - Integration with LFX Insights for historical data
 - Contributor verification
 
+## Contributing
+
+This is an early-stage experiment and we'd love your input. Here's how you can help:
+
+- **Discuss the scoring model** — Open an [issue](https://github.com/jonathimer/contributor-score/issues) to suggest new signals, weight adjustments, or edge cases we should consider
+- **Report bugs** — Found something broken? Let us know
+- **Submit PRs** — Fork the repo, make your changes, and open a pull request
+
+Please open an issue before starting work on major changes so we can discuss the approach.
+
 ## License
 
 MIT
