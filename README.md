@@ -42,6 +42,10 @@ A trust score based on publicly available GitHub data that helps maintainers:
 
 ## Usage
 
+### Website
+
+Check any contributor at [jonathimer.github.io/contributor-score](https://jonathimer.github.io/contributor-score)
+
 ### CLI
 
 ```bash
