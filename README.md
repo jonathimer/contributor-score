@@ -124,11 +124,9 @@ jobs:
 
 ## Future Enhancements
 
-- Integration with LFX Insights for historical data beyond 90 days
-- Cross-project reputation from LF projects
-- Maintainer endorsements
-- Organization verification
+- Integration with LFX Insights for historical data
+- Contributor verification
 
 ## License
 
-Apache 2.0 - jonathimer
+MIT
