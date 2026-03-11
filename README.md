@@ -8,7 +8,9 @@ Open source projects are seeing a growing influx of low-quality, AI-generated pu
 
 Communtiy references: 
 
+- "LLM-generated (slop) PRs are going to fundamentally reshape how open source communities function." [Jason Bosco](https://www.linkedin.com/posts/jasonbosco_llm-generated-slop-prs-are-going-to-fundamentally-activity-7435716863873150977-HxUO?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAACQX2REBjZW4PkmUmgybIySGkbCTQIEbMWg)
 - "Open source contributions are dead unless things change drastically" [@peer_rich](https://x.com/peer_rich/status/2030743675857162330)
+
 
 ## The Solution
 
