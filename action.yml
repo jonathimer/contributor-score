@@ -1,6 +1,6 @@
 name: 'Contributor Score'
 description: 'Calculate a trust score for PR authors based on their GitHub contribution history'
-author: 'jonathimer'
+author: 'Jonathan Reimer'
 
 inputs:
   github-token:
