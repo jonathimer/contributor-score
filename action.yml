@@ -1,0 +1,136 @@
+name: 'Contributor Score'
+description: 'Calculate a trust score for PR authors based on their GitHub contribution history'
+author: 'jonathimer'
+
+inputs:
+  github-token:
+    description: 'GitHub token for API access'
+    required: true
+    default: ${{ github.token }}
+  username:
+    description: 'GitHub username to check (defaults to PR author)'
+    required: false
+  add-comment:
+    description: 'Add a comment to the PR with the score'
+    required: false
+    default: 'true'
+  add-label:
+    description: 'Add a trust label to the PR'
+    required: false
+    default: 'true'
+  fail-below:
+    description: 'Fail the check if score is below this threshold (0-100, 0 to disable)'
+    required: false
+    default: '0'
+
+outputs:
+  score:
+    description: 'The calculated trust score (0-100)'
+  level:
+    description: 'Trust level (HIGH, MEDIUM, LOW, NEW)'
+  username:
+    description: 'The GitHub username that was checked'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Calculate Trust Score
+      id: trust-score
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+      run: |
+        # Determine username
+        if [ -n "${{ inputs.username }}" ]; then
+          USERNAME="${{ inputs.username }}"
+        else
+          USERNAME="${{ github.event.pull_request.user.login }}"
+        fi
+
+        # Run the trust score calculator
+        RESULT=$(node ${{ github.action_path }}/trust-score.js "$USERNAME" --json 2>/dev/null)
+
+        SCORE=$(echo "$RESULT" | jq -r '.score')
+        LEVEL=$(echo "$RESULT" | jq -r '.trustLevel.level')
+        EMOJI=$(echo "$RESULT" | jq -r '.trustLevel.emoji')
+
+        echo "score=$SCORE" >> $GITHUB_OUTPUT
+        echo "level=$LEVEL" >> $GITHUB_OUTPUT
+        echo "username=$USERNAME" >> $GITHUB_OUTPUT
+        echo "result<<EOF" >> $GITHUB_OUTPUT
+        echo "$RESULT" >> $GITHUB_OUTPUT
+        echo "EOF" >> $GITHUB_OUTPUT
+
+    - name: Add Label
+      if: inputs.add-label == 'true' && github.event_name == 'pull_request'
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github-token }}
+      run: |
+        LEVEL="${{ steps.trust-score.outputs.level }}"
+        PR_NUMBER="${{ github.event.pull_request.number }}"
+
+        case $LEVEL in
+          HIGH)   LABEL="trust: high" ;;
+          MEDIUM) LABEL="trust: medium" ;;
+          LOW)    LABEL="trust: low" ;;
+          *)      LABEL="trust: new" ;;
+        esac
+
+        # Create label if it doesn't exist
+        gh label create "$LABEL" --force --repo ${{ github.repository }} 2>/dev/null || true
+
+        # Add label to PR
+        gh pr edit $PR_NUMBER --add-label "$LABEL" --repo ${{ github.repository }}
+
+    - name: Add Comment
+      if: inputs.add-comment == 'true' && github.event_name == 'pull_request'
+      shell: bash
+      env:
+        GH_TOKEN: ${{ inputs.github-token }}
+      run: |
+        SCORE="${{ steps.trust-score.outputs.score }}"
+        LEVEL="${{ steps.trust-score.outputs.level }}"
+        USERNAME="${{ steps.trust-score.outputs.username }}"
+
+        case $LEVEL in
+          HIGH)   EMOJI="🟢" ;;
+          MEDIUM) EMOJI="🟡" ;;
+          LOW)    EMOJI="🟠" ;;
+          *)      EMOJI="🔴" ;;
+        esac
+
+        COMMENT="### $EMOJI Contributor Score: $SCORE/100
+
+**@$USERNAME** has a **$LEVEL** trust level based on their GitHub contribution history.
+
+<details>
+<summary>Score Breakdown</summary>
+
+\`\`\`
+$(echo '${{ steps.trust-score.outputs.result }}' | jq -r '.breakdown | to_entries[] | "\(.key): \(.value.points)/\(.value.max) - \(.value.value)"')
+\`\`\`
+
+</details>
+
+---
+<sub>This is an automated check based on public GitHub data. New contributors are welcome!</sub>"
+
+        gh pr comment ${{ github.event.pull_request.number }} --body "$COMMENT" --repo ${{ github.repository }}
+
+    - name: Check Threshold
+      if: inputs.fail-below != '0'
+      shell: bash
+      run: |
+        SCORE="${{ steps.trust-score.outputs.score }}"
+        THRESHOLD="${{ inputs.fail-below }}"
+
+        if [ "$SCORE" -lt "$THRESHOLD" ]; then
+          echo "::error::Trust score ($SCORE) is below threshold ($THRESHOLD)"
+          exit 1
+        fi
