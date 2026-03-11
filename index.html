@@ -786,9 +786,9 @@
 
     function getTrustLevel(score) {
       if (score >= 70) return { level: 'high', label: 'HIGH', emoji: '●', description: 'Established contributor with strong track record' };
-      if (score >= 40) return { level: 'medium', label: 'MEDIUM', emoji: '●', description: 'Some history, exercise normal review' };
-      if (score >= 20) return { level: 'low', label: 'LOW', emoji: '●', description: 'Limited history, review carefully' };
-      return { level: 'new', label: 'NEW', emoji: '●', description: 'New or inactive, thorough review recommended' };
+      if (score >= 40) return { level: 'medium', label: 'MEDIUM', emoji: '●', description: 'Some contribution history, exercise review' };
+      if (score >= 20) return { level: 'low', label: 'LOW', emoji: '●', description: 'Limited history, consider conducting automated review' };
+      return { level: 'new', label: 'NEW', emoji: '●', description: 'New or inactive account, consider conducting automated review' };
     }
 
     function renderResults(username, data, score, breakdown, trustLevel) {

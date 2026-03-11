@@ -166,9 +166,9 @@ function calculateScore(data) {
 
 function getTrustLevel(score) {
   if (score >= 70) return { level: 'HIGH', emoji: '🟢', description: 'Established contributor with strong track record' };
-  if (score >= 40) return { level: 'MEDIUM', emoji: '🟡', description: 'Some contribution history, exercise normal review' };
-  if (score >= 20) return { level: 'LOW', emoji: '🟠', description: 'Limited history, review carefully' };
-  return { level: 'NEW', emoji: '🔴', description: 'New or inactive contributor, thorough review recommended' };
+  if (score >= 40) return { level: 'MEDIUM', emoji: '🟡', description: 'Some contribution history, exercise review' };
+  if (score >= 20) return { level: 'LOW', emoji: '🟠', description: 'Limited history, consider conducting automated review' };
+  return { level: 'NEW', emoji: '🔴', description: 'New or inactive account, consider conducting automated review' };
 }
 
 async function calculateTrustScore(username) {
