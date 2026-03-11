@@ -36,9 +36,9 @@ A trust score based on publicly available GitHub data that helps maintainers:
 ## Trust Levels
 
 - 🟢 **HIGH** (70-100): Established contributor with strong track record
-- 🟡 **MEDIUM** (40-69): Some contribution history, exercise normal review
-- 🟠 **LOW** (20-39): Limited history, review carefully
-- 🔴 **NEW** (0-19): New or inactive contributor, thorough review recommended
+- 🟡 **MEDIUM** (40-69): Some contribution history, exercise review
+- 🟠 **LOW** (20-39): Limited history, consider conducting automated review
+- 🔴 **NEW** (0-19): New or inactive account, consider conducting automated review
 
 ## Usage
 
