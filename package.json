@@ -1,0 +1,28 @@
+{
+  "name": "contributor-score",
+  "version": "0.1.0",
+  "description": "A simple reputation score for open source contributors",
+  "main": "trust-score.js",
+  "bin": {
+    "trust-score": "./trust-score.js"
+  },
+  "scripts": {
+    "test": "node trust-score.js torvalds"
+  },
+  "keywords": [
+    "github",
+    "trust",
+    "contributors",
+    "spam",
+    "open-source"
+  ],
+  "author": "jonathimer",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jonathimer/contributor-trust-score"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
