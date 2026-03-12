@@ -31,7 +31,7 @@
 
     header {
       text-align: center;
-      margin-bottom: 18px;
+      margin-bottom: 32px;
     }
 
     .badge {
@@ -60,19 +60,19 @@
     }
 
     .note {
-      margin-top: 16px;
-      padding: 16px;
-      background: #fef3c7;
-      border: 1px solid #fcd34d;
-      border-radius: 8px;
-      color: #92400e;
+      margin-top: 12px;
+      padding: 0;
+      background: transparent;
+      border: none;
+      border-radius: 0;
+      color: #a1a1aa;
       font-size: 13px;
-      text-align: left;
+      text-align: center;
     }
 
     .info-section {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 16px;
       margin-bottom: 48px;
     }
@@ -97,8 +97,17 @@
       line-height: 1.6;
     }
 
+    .info-card a {
+      color: #09090b;
+      text-decoration: underline;
+    }
+
+    .info-card a:hover {
+      color: #52525b;
+    }
+
     .search-box {
-      margin-bottom: 32px;
+      margin-bottom: 48px;
     }
 
     .input-group {
@@ -551,10 +560,6 @@
         font-size: 16px;
       }
 
-      .info-section {
-        grid-template-columns: 1fr;
-      }
-
       .input-group {
         flex-direction: column;
       }
@@ -581,19 +586,8 @@
       <span class="badge">Open Source</span>
       <h1>Contributor Score</h1>
       <p class="subtitle">A reputation score for open source contributors</p>
-      <p class="note">This is an experiment exploring whether contributor reputation signals can help maintainers triage PRs. The scoring model is a starting point for discussion, not a production-ready solution.</p>
+      <p class="note">Please note: This is an experiment exploring whether contributor data can help maintainers triage PRs. The scoring model is a starting point for discussion, not a production-ready solution.</p>
     </header>
-
-    <div class="info-section">
-      <div class="info-card">
-        <h2>What is Contributor Score?</h2>
-        <p>A score from 0-100 based on public GitHub data, considering account age, PR acceptance rate, contribution history, and more. Think "credit score for open source".</p>
-      </div>
-      <div class="info-card">
-        <h2>Why do we need this?</h2>
-        <p>Open source is at a turning point. Many maintainers stopped accepting outside contributions because of low-quality, AI-generated pull requests. This score could help maintainers systematically filter out low-quality/spam contributions. </p>
-      </div>
-    </div>
 
     <div class="search-box">
       <div class="input-group">
@@ -602,6 +596,21 @@
           <input type="text" id="username" placeholder="Enter GitHub username" autofocus>
         </div>
         <button id="lookup-btn" onclick="lookupScore()">Lookup</button>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-card">
+        <h2>What is Contributor Score?</h2>
+        <p>A simple trust score (0-100) for GitHub contributors based on public data. The score combines several signals: Account Age (20 pts), PR Acceptance Rate (30 pts), Contribution Volume (15 pts), Repo Diversity (15 pts), Social Proof (10 pts), and Recent Activity (10 pts). A Spam Penalty (-20 pts) is applied for suspicious patterns like new accounts with high rejection rates.</p>
+      </div>
+      <div class="info-card">
+        <h2>Why This Matters</h2>
+        <p>Open source projects are seeing a growing influx of low-quality, AI-generated pull requests. Maintainers are stuck playing whack-a-mole, manually reviewing and blocking low quality contributions. If we as an open source community don't find solutions, more and more projects will shut down outside contributions.</p>
+      </div>
+      <div class="info-card">
+        <h2>Share Your Feedback</h2>
+        <p>This is an early-stage experiment and I'd love your input. Head over to the <a href="https://github.com/jonathimer/contributor-score" target="_blank">GitHub repo</a> to open an issue or submit a PR.</p>
       </div>
     </div>
 
