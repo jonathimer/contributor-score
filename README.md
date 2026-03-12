@@ -121,9 +121,9 @@ node trust-score.js <username> --json
 
 ## Limitations
 
-- **New contributors**: The system is designed to flag new contributors, but that doesn't mean they're untrustworthy. New contributors are welcome! The score is just one signal for maintainers.
-- **90-day event window**: GitHub's Events API only returns the last 90 days of activity.
-- **Rate limits**: GitHub API has rate limits (5,000/hour authenticated, 60/hour unauthenticated). Use a token for best results.
+- **New contributor bias**: Activity-based scoring penalizes first-time or infrequent contributors who may be perfectly legitimate. This could reduce new contributor conversion — worth measuring in any pilot.
+- **Gaming**: Once scoring signals are known, bad actors will optimize for them. Stars, forks, and commit counts are all gameable. This shifts the problem rather than solving it.
+- **Activity ≠ quality**: A spammy contributor can have a great GitHub profile. If maintainers trust the score too heavily, high-scoring low-quality PRs still get through — but now with false assurance.
 
 ## Contributing
 
