@@ -121,8 +121,8 @@ node trust-score.js <username> --json
 
 ## Limitations
 
-- **New contributor bias**: Activity-based scoring penalizes first-time or infrequent contributors who may be perfectly legitimate. This could reduce new contributor conversion — worth measuring in any pilot.
-- **Gaming**: Once scoring signals are known, bad actors will optimize for them. Stars, forks, and commit counts are all gameable. This shifts the problem rather than solving it.
+- **New contributor bias**: Activity-based scoring penalizes first-time or infrequent contributors who may be perfectly legitimate. This could reduce new contributor conversion.
+- **Gaming**: Once scoring signals are known, bad actors will optimize for them. This might shift the problem rather than solving it.
 - **Activity ≠ quality**: A spammy contributor can have a great GitHub profile. If maintainers trust the score too heavily, high-scoring low-quality PRs still get through — but now with false assurance.
 
 ## Contributing
