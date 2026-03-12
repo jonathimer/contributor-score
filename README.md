@@ -46,6 +46,45 @@ A trust score based on publicly available GitHub data that helps maintainers:
 
 Check any contributor at [jonathimer.github.io/contributor-score](https://jonathimer.github.io/contributor-score)
 
+### GitHub Action
+
+Automatically check Contributor Score on every PR. Add labels, post comments, and optionally fail checks for low scores.
+
+```yaml
+name: Contributor Score
+on:
+  pull_request:
+    types: [opened, reopened]
+
+jobs:
+  check-score:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: jonathimer/contributor-score@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          add-label: true
+          add-comment: true
+          # fail-below: 20  # Optional: fail if score is below threshold
+```
+
+#### Inputs
+
+| Input | Description | Default |
+|-------|-------------|---------|
+| `github-token` | GitHub token for API access | `${{ github.token }}` |
+| `add-comment` | Add a comment to the PR with the score | `true` |
+| `add-label` | Add a trust label to the PR | `true` |
+| `fail-below` | Fail the check if score is below this threshold (0 to disable) | `0` |
+
+#### Outputs
+
+| Output | Description |
+|--------|-------------|
+| `score` | The calculated trust score (0-100) |
+| `level` | Trust level (HIGH, MEDIUM, LOW, NEW) |
+| `username` | The GitHub username that was checked |
+
 ### CLI
 
 ```bash
@@ -85,50 +124,6 @@ node trust-score.js <username> --json
 - **New contributors**: The system is designed to flag new contributors, but that doesn't mean they're untrustworthy. New contributors are welcome! The score is just one signal for maintainers.
 - **90-day event window**: GitHub's Events API only returns the last 90 days of activity.
 - **Rate limits**: GitHub API has rate limits (5,000/hour authenticated, 60/hour unauthenticated). Use a token for best results.
-
-## GitHub Action
-
-Automatically check Contributor Score on every PR. Add labels, post comments, and optionally fail checks for low scores.
-
-```yaml
-name: Contributor Score
-on:
-  pull_request:
-    types: [opened, reopened]
-
-jobs:
-  check-score:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: jonathimer/contributor-score@main
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          add-label: true
-          add-comment: true
-          # fail-below: 20  # Optional: fail if score is below threshold
-```
-
-### Inputs
-
-| Input | Description | Default |
-|-------|-------------|---------|
-| `github-token` | GitHub token for API access | `${{ github.token }}` |
-| `add-comment` | Add a comment to the PR with the score | `true` |
-| `add-label` | Add a trust label to the PR | `true` |
-| `fail-below` | Fail the check if score is below this threshold (0 to disable) | `0` |
-
-### Outputs
-
-| Output | Description |
-|--------|-------------|
-| `score` | The calculated trust score (0-100) |
-| `level` | Trust level (HIGH, MEDIUM, LOW, NEW) |
-| `username` | The GitHub username that was checked |
-
-## Future Enhancements
-
-- Integration with LFX Insights for historical data
-- Contributor verification
 
 ## Contributing
 
