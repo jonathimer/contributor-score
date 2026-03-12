@@ -10,6 +10,7 @@ Open source projects are seeing a growing influx of low-quality, AI-generated pu
 
 Communtiy references: 
 
+- [@mitchellh](https://x.com/mitchellh/status/2018458123632283679?s=20): "For the first time ever, I'm considering closing external PRs to my OSS projects completely. This will throw the baby out with the bathwater and I hate that, but we close auto-opened slop PRs every single day."
 - [Jason Bosco](https://www.linkedin.com/posts/jasonbosco_llm-generated-slop-prs-are-going-to-fundamentally-activity-7435716863873150977-HxUO?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAACQX2REBjZW4PkmUmgybIySGkbCTQIEbMWg): "LLM-generated (slop) PRs are going to fundamentally reshape how open source communities function." 
 - [@peer_rich](https://x.com/peer_rich/status/2030743675857162330): "Open source contributions are dead unless things change drastically" 
 
